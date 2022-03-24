@@ -1,0 +1,54 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+bind-address: "*"
+unified-delay: true
+ipv6: false
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7894
+  fallback-filter:
+    geoip: false
+    ipcidr:
+    - 240.0.0.0/4
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+  fallback:
+    - tcp://1.1.1.1
+    - tcp://8.8.8.8
+    - 1.1.1.1
+    - 8.8.8.8
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  
+proxies:
+  - {name: trojan-1, server: sghe.tjvpn.org, port: 443
+, udp: true, type: trojan, password: b39a1c40-a987-11ec-b437-225401db9d57, sni: b39a1c40-a987-11ec-b437-225401db9d57@sghe.tjvpn.org:443/v24.tiktokcdn.com
+, skip-cert-verify: true}
+  - {name: trojan-2, server: sghe.tjvpn.org, port: 443, udp: true, type: trojan, password: e8e864b0-a987-11ec-b739-225401db9d57, sni: e8e864b0-a987-11ec-b739-225401db9d57@sghe.tjvpn.org:443/v27.tiktokcdn.com, skip-cert-verify: true}
+
+proxy-groups:
+  - name: kituvpn-load-balance
+    type: load-balance
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 300
+    strategy: consistent-hashing
+    proxies:
+      - trojan-1
+      - trojan-2
+  
+rules:
+ - MATCH,kituvpn-load-balance
