@@ -1,3 +1,4 @@
+
 port: 7890
 socks-port: 7891
 redir-port: 7892
@@ -7,10 +8,7 @@ log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
 bind-address: "*"
-unified-delay: true
 ipv6: false
-profile:
-  store-selected: true
 dns:
   enable: true
   ipv6: false
@@ -30,22 +28,24 @@ dns:
     - tcp://8.8.8.8
     - 1.1.1.1
     - 8.8.8.8
-  default-nameserver:
-    - 1.1.1.1
-    - 8.8.8.8
-  
+tun:
+  enable: true
+  stack: system 
+  macOS-auto-route: true
+  macOS-auto-detect-interface: true
+  dns-hijack:
+    - tcp://8.8.8.8:53
+experimental:
+  interface-name: en0
+
 proxies:
-  - {name: trojan, server: sghe.tjvpn.org, port: 443
-, udp: true, type: trojan, password: a3150ed0-ae82-11ec-b135-225401db9d57, sni: v27.tiktokcdn.com
-, skip-cert-verify: true}
+  - {name: sghe.tjvpn.org, server: sghe.tjvpn.org, port: 443, udp: true, type: trojan, password: ceb4b440-b48f-11ec-b636-225401db9d57, sni: v27.tiktokcdn.com, skip-cert-verify: true}
+
 proxy-groups:
-  - name: kituvpn-load-balance
-    type: load-balance
-    url: 'http://www.gstatic.com/generate_204'
-    interval: 300
-    strategy: consistent-hashing
+  - name: sshkit-generator
+    type: select
     proxies:
-      - trojan
-  
+      - sghe.tjvpn.org
+
 rules:
- - MATCH,kituvpn-load-balance
+ - MATCH,sshkit-generator
