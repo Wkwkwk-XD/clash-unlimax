@@ -44,7 +44,9 @@ proxy-groups:
     url: 'http://www.gstatic.com/generate_204'
     interval: 300
     proxies:
-      - trojan-
+      - trojan-SGHE
+      - trojan-OVH
+      - trojan-ID
   
 rules:
  - MATCH,kituvpn-select
