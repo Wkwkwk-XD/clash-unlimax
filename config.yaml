@@ -35,7 +35,9 @@ dns:
     - 8.8.8.8
   
 proxies:
-  - {name: trojan-, server: sghe.tjvpn.org, port: 443, udp: true, type: trojan, password: 61a0f870-cff7-11ec-b138-225401db9d57, sni: v27.tiktokcdn.com, skip-cert-verify: true}
+  - {name: trojan-SGHE, server: sghe.tjvpn.org, port: 443, udp: true, type: trojan, password: 61a0f870-cff7-11ec-b138-225401db9d57, sni: v27.tiktokcdn.com, skip-cert-verify: true}
+  - {name: trojan-OVH, server: sg-ovh.tjvpn.org, port: 443, udp: true, type: trojan, password: bcb5f010-cff7-11ec-b334-225401db9d57, sni: v27.tiktokcdn.com, skip-cert-verify: true}
+  - {name: trojan-ID, server: id-1.tjvpn.org, port: 443, udp: true, type: trojan, password: d935fb70-cff7-11ec-b636-225401db9d57, sni: v27.tiktokcdn.com, skip-cert-verify: true}
 proxy-groups:
   - name: kituvpn-select
     type: select
