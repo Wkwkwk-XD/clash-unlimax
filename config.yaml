@@ -43,8 +43,6 @@ proxy-groups:
     interval: 300
     proxies:
       - trojan-SGHE
-      - trojan-OVH
-      - trojan-ID
   
 rules:
  - MATCH,kituvpn-select
