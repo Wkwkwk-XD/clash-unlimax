@@ -1,0 +1,57 @@
+
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+bind-address: "*"
+unified-delay: true
+ipv6: false
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 0.0.0.0:7894
+  fallback-filter:
+    geoip: false
+    ipcidr:
+    - 240.0.0.0/4
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+  fallback:
+    - tcp://1.1.1.1
+    - tcp://8.8.8.8
+    - 1.1.1.1
+    - 8.8.8.8
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  
+proxies:
+  - name: v27.tiktokcdn.com
+    type: trojan
+    server: sghe.tjvpn.org
+    port: 443
+    password: f7857030-f5f9-11ec-b935-225401db9d57
+    udp: true
+    sni: v27.tiktokcdn.com
+    skip-cert-verify: true
+
+proxy-groups:
+  - name: Server
+    type: select
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 300
+    proxies:
+      - v27.tiktokcdn.com
+
+rules:
+ - MATCH,Server
