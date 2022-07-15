@@ -40,7 +40,7 @@ proxies:
     type: trojan
     server: sghe.tjvpn.org
     port: 443
-    password: d669cac0-fdd7-11ec-b238-225401db9d57
+    password: baf12490-03e4-11ed-b037-225401db9d57
     udp: true
     sni: v27.tiktokcdn.com
     skip-cert-verify: true
